@@ -161,7 +161,7 @@ public class ProductController {
    
    @RequestMapping(value = "listProduct")
    public String listProduct(@ModelAttribute("search") Search search, Model model, ServletRequest request,
-		   @RequestParam("menu") String menu
+		   @RequestParam("menu") String menu//required=false
 		   ) throws Exception{
 	   
 	   //request.getAttribute("menu");

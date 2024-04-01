@@ -42,13 +42,13 @@ public class RestProductController {
       System.out.println(this.getClass());
    }
    
-	/*
-	 * @Value("#{commonProperties['pageUnit']}")
-	 * //@Value("#{commonProperties['pageUnit'] ?: 3}") int pageUnit;
-	 * 
-	 * @Value("#{commonProperties['pageSize']}")
-	 * //@Value("#{commonProperties['pageSize'] ?: 2}") int pageSize;
-	 */
+	
+//	  @Value("#{commonProperties['pageUnit']}")
+//	  //@Value("#{commonProperties['pageUnit'] ?: 3}") int pageUnit;
+//	  
+//	  @Value("#{commonProperties['pageSize']}")
+//	  //@Value("#{commonProperties['pageSize'] ?: 2}") int pageSize;
+	 
 
    
 //   @RequestMapping(value = "addProduct", method = RequestMethod.GET)
@@ -74,9 +74,9 @@ public class RestProductController {
 //	   return "forward:/product/addProduct.jsp";
 //   }
    
-   @RequestMapping(value = "json/getProduct/{prodNo}", method = RequestMethod.GET)
+   @RequestMapping(value = "json/getProduct/{prodNo}/{menu}", method = RequestMethod.GET)
    public Product getProduct(@PathVariable int prodNo, 
-	   									@RequestParam("menu") String menu,
+		   @PathVariable String menu,
 		   										Model model, ServletRequest request,
 		   										HttpServletResponse response
 		   										) throws Exception {

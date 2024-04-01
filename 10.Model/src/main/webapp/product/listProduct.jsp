@@ -14,6 +14,11 @@
 	<script src="http://code.jquery.com/jquery-2.1.4.min.js"></script>
 	<script type="text/javascript">
 	
+	function fncGetProductList(page) {
+		$("#currentPage").val(page);
+		$('form').attr("method","POST").attr("action","/product/listProduct?menu=${menu}").submit();
+	}
+	
 	$(function(){
 		
 		 $( "td.ct_btn01:contains('검색')" ).on("click" , function() {
@@ -51,30 +56,55 @@
 
  $(function() {
        $(".ct_list_pop td:nth-child(3)").on("click", function() {
-           var prodNo = $(".ct_list_pop td:nth-child(3)").find('input[name^="prodNo"]').val();
+//     	   alert($(this));
+//     	   alert($(this).find('input[name^="prodNo"]').html());
+//     	   alert($(this).find('input[name^="prodNo"]').val());
+           var prodNo = $(this).find('input[name^="prodNo"]').val();
            // hidden input을 추가하여 form에 'prodNo' 값을 함께 전송합니다.
-           $(".ct_list_pop td:nth-child(3)").append('<input type="hidden" name^="prodNo" value="' + prodNo + '">');
+           $(this).append('<input type="hidden" name^="prodNo" value="' + prodNo + '">');
            // form을 제출합니다.
-           $(this).closest("form").submit();
-          
-           self.location="/product/getProduct?menu=${param.menu}&prodNo="+prodNo;
-       });
+//            $(this).closest("form").submit();
+         
+           
+           $.ajax(
+        		   {
+        			   // url : path
+        			   // url ? n = v  parameter
+        			   url : "/product/json/getProduct/"+prodNo+"/${menu}" ,
+						method : "GET" ,
+						dataType : "json" ,
+						headers : {
+							"Accept" : "application/json",
+							"Content-Type" : "application/json"
+						},
+						success : function(JSONData , status) {
+							alert(status);
+							
+							var displayValue = "<h5>"
+															+"상품명 : "+JSONData.prodName+ "<br/>"
+															+"상세정보 : "+JSONData.prodDetail+ "<br/>"
+															+"가격 : "+JSONData.Price+ "<br/>"
+															+"등록일 : "+JSONData.manuDate+ "<br/>"
+															+"상품번호 : "+JSONData.prodNo+ "<br/>"
+															+"</h5>";
+															
+							$("h5").remove();
+							$( "#"+prodNo+"" ).html(displayValue);	
+						}
+        		   });
+          /*  self.location="/product/getProduct?menu=${param.menu}&prodNo="+prodNo;
+       */
 
-
+ 	});
 		
 		$(".ct_list_pop td:nth-child(3)").css("color", "red"); // 글씨 색상 변경
 		$("h7").css("color", "red");
 		
 		$(".ct_list_pop:nth-child(4n+6)").css("background-color", "whitesmoke");
 		console.log ( $(".ct_list_pop:nth-child(4)" ).html() );
-		});
+	});
 
-<!-- 자바 스크립트 부분
-function fncGetProductList(currentPage){
-   document.getElementById("currentPage").value = currentPage;
-   document.detailForm.submit();
-}
--->
+
 
 </script>
 </head>
@@ -224,7 +254,7 @@ function fncGetProductList(currentPage){
       </td>   
    </tr>
    <tr>
-      <td colspan="11" bgcolor="D6D7D6" height="1"></td>
+      <td id="${product.prodNo}" colspan="11" bgcolor="D6D7D6" height="1"></td>
    </tr>   
    <%--  <%} %> --%>
    </c:forEach>
