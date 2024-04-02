@@ -17,14 +17,25 @@
 	   
 		$( function() {
 			
+			// 아이디, 비밀번호 입력 후 엔터키로 실행
+			    $("input:text, input:password").keypress(function(event) {
+			        if (event.which === 13) { // Enter 키 입력이면
+			            // 로그인 버튼 클릭과 같은 동작 실행
+			            $("img[src='/images/btn_login.gif']").click();
+			        }
+			    });
+			
 			//==> DOM Object GET 3가지 방법 ==> 1. $(tagName) : 2.(#id) : 3.$(.className)
 			$("#userId").focus();
-			
+				
+	
 			//==>"Login"  Event 연결
 			$("img[src='/images/btn_login.gif']").on("click" , function() {
 
 				var id=$("input:text").val();
 				var pw=$("input:password").val();
+				
+				
 				
 				if(id == null || id.length <1) {
 					alert('ID 를 입력하지 않으셨습니다.');
@@ -84,7 +95,6 @@
 								
 			});
 		});
-		
 		
 		//============= 회원원가입화면이동 =============
 		$( function() {

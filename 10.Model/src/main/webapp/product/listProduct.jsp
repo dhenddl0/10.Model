@@ -8,11 +8,13 @@
 
 <head>
 <title>상품 목록조회</title>
-
+	
 	<link rel="stylesheet" href="/css/admin.css" type="text/css">
 	
 	<script src="http://code.jquery.com/jquery-2.1.4.min.js"></script>
 	<script type="text/javascript">
+
+	
 	
 	function fncGetProductList(page) {
 		$("#currentPage").val(page);
@@ -80,15 +82,15 @@
 						success : function(JSONData , status) {
 							alert(status);
 							
-							var displayValue = "<h5>"
+							var displayValue = "<h8>"
 															+"상품명 : "+JSONData.prodName+ "<br/>"
 															+"상세정보 : "+JSONData.prodDetail+ "<br/>"
-															+"가격 : "+JSONData.Price+ "<br/>"
+															+"가격 : "+JSONData.price+ "<br/>"
 															+"등록일 : "+JSONData.manuDate+ "<br/>"
 															+"상품번호 : "+JSONData.prodNo+ "<br/>"
-															+"</h5>";
+															+"</h8>";
 															
-							$("h5").remove();
+							$("h8").remove();
 							$( "#"+prodNo+"" ).html(displayValue);	
 						}
         		   });
@@ -107,13 +109,22 @@
 
 
 </script>
+
+<!-- 글씨체 변경 -->
+	 <style>
+	 * {
+	     font-family: verdana, fantasy;
+	 }
+	</style>
+
 </head>
 
 <body bgcolor="#ffffff" text="#000000">
 
 <div style="width:98%; margin-left:10px;">
 
-<form name="detailForm" action="/product/listProduct?menu=${param.menu}" method="post">
+<form name="detailForm" >
+<%-- <form name="detailForm" action="/product/listProduct?menu=${param.menu}" method="post"> --%>
 
 
 <table width="100%" height="37" border="0" cellpadding="0"   cellspacing="0">

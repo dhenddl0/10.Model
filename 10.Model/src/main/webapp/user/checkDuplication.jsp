@@ -19,7 +19,7 @@
 	
 		$(function() {
 			
-			$("#userId").focus();
+// 			$("#userId").focus();
 		
 			//==> keydown Event 연결
 			//==> CallBackFunction  :  EventObject 인자로 받을수 있다.
@@ -28,22 +28,27 @@
 			//==> - keyCode 값 alert() 확인하는 것 으로 종료
 			$("#userId").on("keydown" , function(event) {
 				
-				alert("keyCode  : "+event.keyCode);
+			/* 	alert("keyCode  : "+event.keyCode); */
 				
-				if(event.keyCode == '13'){
+				if(event.keyCode == 13){
 					//fncCheckDuplication();
+					 $("td.ct_btn:contains('중복확인')").click();
 				}
 			});
 			
-		});
+// 		});
+		
 		
 		
 		//==> "중복확인"  Event 처리
-		$(function() {
+		
+// 		$(function() {
+	
 			//==> DOM Object GET 3가지 방법 ==> 1. $(tagName) : 2.(#id) : 3.$(.className)
 			//==> 1 과 3 방법 조합 : $("tagName.className:filter함수") 사용함.				
 			$("td.ct_btn:contains('중복확인')").on("click" , function() {
-				
+			
+
 				//==>Debug
 				//alert($("td.ct_btn:contains('중복확인')").html())
 				
@@ -128,7 +133,7 @@
 					<td width="8" style="padding-bottom:3px;"><img src="/images/ct_bot_ttl01.gif" width="4" height="7"></td>
 					<td class="ct_ttl02">
 						<c:if test="${ ! empty result }">
-							${userId} 는 사용
+							${userId} 은/는 사용
 							${ result ? "" : "불" }가능 합니다.
 						</c:if>
 					</td>
@@ -171,7 +176,8 @@
 									<img src="/images/ct_btng01.gif" width="4" height="21">
 								</td>
 								<td align="center" background="/images/ct_btng02.gif" class="ct_btn" style="padding-top:3px;">
-									중복확인
+									<a href="javascript:fncCheckDuplication();">중복확인</a>
+				
 								</td>
 								<td width="4" height="21">
 									<img src="/images/ct_btng03.gif" width="4" height="21"/>
